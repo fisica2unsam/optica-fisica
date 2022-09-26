@@ -5,38 +5,14 @@ import matplotlib.ticker as plticker
 plt.rcParams["figure.figsize"] = (9,4)
 from functions import difraccion, wavelength_to_rgb
 
-
-from pyodide.http import open_url
 from pyodide import create_proxy
 
-# url = (
-#     "https://raw.githubusercontent.com/Cheukting/pyscript-ice-cream/main/bj-products.csv"
-# )
-# ice_data = pd.read_csv(open_url(url))
-# current_selected = []
 
-
-
-
-
-
-"""
-LAMBDA1 = 400
-LAMBDA2 = 500
-
-fig = plot(lambda1, lambda2)
-
-callback(lambda1, lambda2):
-    nwdata (lambda1, lambda2)
-    fig.update_data(nwdata)
-
-bind_callback
-
-"""
 a = 4e-6
 L = 1
 lam0 = 400e-9
-x_lim = 3.1*lam0*L/a
+# x_lim = 3.1*lam0*L/a
+x_lim = 0.4
 x = np.linspace(-x_lim, x_lim, 100000)
 
 def plot(fig, ax, lam1, lam2, L, a):
