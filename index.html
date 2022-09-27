@@ -19,12 +19,21 @@
         <label for="lam1">Longitud 1</label><br/>
         <input type="range" id="lam1" name="lam" min="400" max="700" step="1" value="400">
         <span id="lam1_txt">400 nm</span><br/>
-        <label for="lam1">Longitud 2</label><br/>
+        <label for="lam2">Longitud 2</label><br/>
         <input type="range" id="lam2" name="lam" min="400" max="700" step="1" value="500">
         <span id="lam2_txt">500 nm</span>
       </div>
       <div id="viz"></div>
       <h2>Interferencia + difracción a través de N rendijas</h2>
+      <div id="input2" style="margin: 20px;">
+        <label for="N">Numero de rendijas</label><br/>
+        <input type="range" id="N" name="params2" min="2" max="7" step="1" value="5">
+        <span id="N_txt">5</span><br/>
+        <label for="lam22">Longitud de onda</label><br/>
+        <input type="range" id="lam22" name="params2" min="400" max="700" step="1" value="600">
+        <span id="lam22_txt">500 nm</span>
+      </div>
+      
       <div id="vizb"></div>
       <py-script src="src/controls.py">
       

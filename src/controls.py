@@ -63,16 +63,19 @@ def setup_2():
     lam = 600 *1e-9
     x_lim = 2.2*lam*L/a
     x = np.linspace(-x_lim, x_lim, 100_000)
-    return lam, N, L, a, d, x, x_lim
+    return L, a, d, x, x_lim
 
 def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
+       
+    Element("N_txt").write(f"{N}")
+    Element("lam22_txt").write(f"{lam} nm")
 
-    y = int_dif(x, lam, L, a, d, N)
-    color = wavelength_to_rgb(lam*1e9)
+    ax3.clear()  
+    ax4.clear()  
 
+    y = int_dif(x, lam*1e-9, L, a, d, N)
+    color = wavelength_to_rgb(lam)
 
-    fig2.set_size_inches(10, 8)
-    fig2.canvas.header_visible = False
     ax3.plot(x,y, color=color)
     ax3.margins(x=0)
     loc = plticker.MultipleLocator(base=0.05) # this locator puts ticks at regular intervals
@@ -94,6 +97,21 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     ax4.yaxis.set_visible(False)
     Element("vizb").write(fig2)
 
+
+input2_elements = document.getElementsByName("params2")
+
+@create_proxy
+def change_params2(event):
+    N, lam = [int(el.value) for el in input2_elements]
+    plot_2(fig2, ax3, ax4, lam, N, *const_2)
+
+for ele in input2_elements:
+    ele.addEventListener("change", change_params2)
+
+
 fig2, (ax3, ax4) = plt.subplots(2, 1, layout='tight')
+fig2.set_size_inches(10, 8)
+fig2.canvas.header_visible = False
+    
 const_2 = setup_2()
-plot_2(fig2, ax3, ax4, *const_2)
+plot_2(fig2, ax3, ax4, 600, 5, *const_2)
