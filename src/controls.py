@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
 from matplotlib.colors import LinearSegmentedColormap
 plt.rcParams["figure.figsize"] = (9,4)
-from functions import difraccion, wavelength_to_rgb, int_dif
+from functions import difraccion, interferencia, wavelength_to_rgb, int_dif
 
 from pyodide import create_proxy
 
@@ -119,3 +119,35 @@ fig2.canvas.header_visible = False
     
 const_2 = setup_2()
 plot_2(fig2, ax3, ax4, 600, 5, *const_2)
+
+##############
+
+
+fig3, ax5 = plt.subplots(layout='tight')
+
+
+L = 1
+N = 6000        # lineas/cm
+d = 1/N *1e-2   # metros
+# a = d/10
+l_inf = 480 *1e-9
+l_sup = 650 *1e-9
+
+x_lim = 3.2*l_sup*L/d
+x = np.linspace(-x_lim, x_lim, 100_000)
+
+# wv = 440 *1e-9
+# waves = np.linspace(wv, wv*1.01, 40)
+
+waves = np.linspace(l_inf, l_sup, 100)
+for wave in waves:
+    i = interferencia(x, wave, L, d, N)
+    ax5.plot(x, i, label=f'{wave*1e9:.0f} nm', color=wavelength_to_rgb(wave*1e9))
+
+# ax.legend()
+# loc = plticker.MultipleLocator(base=0.05) # this locator puts ticks at regular intervals
+# ax.xaxis.set_major_locator(loc)
+ax5.set_xlabel('x (m)')
+ax5.set_ylabel('Intensidad')
+
+Element("vizc").write(fig3)
