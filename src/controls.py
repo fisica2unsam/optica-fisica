@@ -85,7 +85,6 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     ax3.xaxis.set_major_locator(loc)
     ax3.set_ylim(0,1)
     # ax3.set_xlabel('sen(θ)')
-    ax.set_xlabel('x (m)')
     ax3.set_ylabel('Intensidad')
     height = 1
     image = np.tile(y, (height,1))
@@ -97,7 +96,8 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     cmap = LinearSegmentedColormap.from_list("simple", colors)
 
     ax4.imshow(image, cmap=cmap, aspect="auto", extent=[-x_lim, x_lim, -1,1] )
-    ax4.set_xlabel('sen(θ)')
+    # ax4.set_xlabel('sen(θ)')
+    ax4.set_xlabel('x (m)')
     ax4.yaxis.set_visible(False)
     Element("vizb").write(fig2)
 
