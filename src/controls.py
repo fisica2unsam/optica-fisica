@@ -127,7 +127,7 @@ fig3, ax5 = plt.subplots(layout='tight')
 
 
 L = 1
-N = 6000        # lineas/cm
+N = 3000        # lineas/cm
 d = 1/N *1e-2   # metros
 # a = d/10
 l_inf = 480 *1e-9
