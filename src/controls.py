@@ -14,10 +14,11 @@ def setup_1():
     lam0 = 400e-9
     x_lim = 4*lam0*L/a
     x = np.linspace(-x_lim, x_lim, 100000)
-    return L,a,x
+    Element("consta").write(f"L = {L} m <br />a = {int(a*1e6)} μm")
+    return L,a,x,x_lim
 
-def plot_1(fig, ax, lam1, lam2, L, a, x):
-    
+def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
+    print(f"{a=}")
     Element("lam1_txt").write(f"{lam1} nm")
     Element("lam2_txt").write(f"{lam2} nm")
 
@@ -33,7 +34,9 @@ def plot_1(fig, ax, lam1, lam2, L, a, x):
     loc = plticker.MultipleLocator(base=0.05) # this locator puts ticks at regular intervals
     ax.xaxis.set_major_locator(loc)
     ax.set_ylim(0,1)
-    ax.set_xlabel('sen(θ)')
+    ax.set_xlim(-x_lim, x_lim)
+    # ax.set_xlabel('sen(θ)')
+    ax.set_xlabel('x (m)')
     ax.set_ylabel('Intensidad')
     ax.legend()
 
@@ -57,12 +60,12 @@ plot_1(fig, ax, 400, 500, *const_1)
 #################################
 def setup_2():
     L = 1
-    d = 30 *1e-6
-    a = 6 *1e-6
-    N = 5
+    d = 30e-6
+    a = 6e-6
     lam = 600 *1e-9
     x_lim = 2.2*lam*L/a
     x = np.linspace(-x_lim, x_lim, 100_000)
+    Element("constb").write(f"L = {L} m <br/> a = {int(a*1e6)} μm<br/>d = {int(d*1e6)} μm")
     return L, a, d, x, x_lim
 
 def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
@@ -81,7 +84,8 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     loc = plticker.MultipleLocator(base=0.05) # this locator puts ticks at regular intervals
     ax3.xaxis.set_major_locator(loc)
     ax3.set_ylim(0,1)
-    ax3.set_xlabel('sen(θ)')
+    # ax3.set_xlabel('sen(θ)')
+    ax.set_xlabel('x (m)')
     ax3.set_ylabel('Intensidad')
     height = 1
     image = np.tile(y, (height,1))
