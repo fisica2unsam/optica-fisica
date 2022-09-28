@@ -16,21 +16,34 @@
       <h1>Física II UNSAM turno tarde</h1>
       <h2>Difracción por una sola rendija, con dos longitudes de onda distintas</h2>
       <div id="input" style="margin: 20px;">
-        <div id=consta></div>
-        <label for="lam1">Longitud 1</label><br/>
-        <input type="range" id="lam1" name="lam" min="400" max="700" step="1" value="400">
-        <span id="lam1_txt">400 nm</span><br/>
-        <label for="lam2">Longitud 2</label><br/>
-        <input type="range" id="lam2" name="lam" min="400" max="700" step="1" value="500">
-        <span id="lam2_txt">500 nm</span>
+        <label for="L1">Distancia a la pantalla</label><br/>
+        <input type="range" id="L1" name="params1" min="1" max="2" step="0.1" value="1">
+        <span id="L1_txt">L = 1 m</span><br/>
+        <label for="a1">Ancho de rendija</label><br/>
+        <input type="range" id="a1" name="params1" min="2" max="6" step="0.1" value="4">
+        <span id="a1_txt">a = 4 μm</span><br/>
+        <label for="lam1">Longitud de onda 1</label><br/>
+        <input type="range" id="lam1" name="params1" min="400" max="700" step="1" value="400">
+        <span id="lam1_txt">λ₁ = 400 nm</span><br/>
+        <label for="lam2">Longitud de onda 2</label><br/>
+        <input type="range" id="lam2" name="params1" min="400" max="700" step="1" value="500">
+        <span id="lam2_txt">λ₂ = 500 nm</span>
       </div>
       <div id="viz"></div>
       <h2>Interferencia + difracción a través de N rendijas</h2>
       <div id="input2" style="margin: 20px;">
-        <div id="constb"></div>
-        <label for="N">Numero de rendijas</label><br/>
-        <input type="range" id="N" name="params2" min="2" max="7" step="1" value="5">
-        <span id="N_txt">5</span><br/>
+        <label for="L2">Distancia a la pantalla</label><br/>
+        <input type="range" id="L2" name="params2" min="1" max="2" step="0.1" value="1">
+        <span id="L2_txt">L = 1 m</span><br/>
+        <label for="N2">Numero de rendijas</label><br/>
+        <input type="range" id="N2" name="params2" min="2" max="7" step="1" value="5">
+        <span id="N2_txt">5</span><br/>
+        <label for="a2">Ancho de rendija</label><br/>
+        <input type="range" id="a2" name="params2" min="2" max="6" step="0.1" value="4">
+        <span id="a2_txt">a = 4 μm</span><br/>
+        <label for="d2">Separación entre rendijas</label><br/>
+        <input type="range" id="d2" name="params2" min="10" max="50" step="1" value="30">
+        <span id="d2_txt">d = 30 μm</span><br/>
         <label for="lam22">Longitud de onda</label><br/>
         <input type="range" id="lam22" name="params2" min="400" max="700" step="1" value="600">
         <span id="lam22_txt">500 nm</span>

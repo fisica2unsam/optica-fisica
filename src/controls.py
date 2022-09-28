@@ -9,23 +9,23 @@ from functions import difraccion, interferencia, wavelength_to_rgb, int_dif
 from pyodide import create_proxy
 
 def setup_1():
-    a = 4e-6
-    L = 1
-    lam0 = 400e-9
-    x_lim = 4*lam0*L/a
+    x_lim = 0.4
     x = np.linspace(-x_lim, x_lim, 100000)
-    Element("consta").write(f"L = {L} m <br />a = {int(a*1e6)} μm")
-    return L,a,x,x_lim
+    return x,x_lim
 
 def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
-    print(f"{a=}")
-    Element("lam1_txt").write(f"{lam1} nm")
-    Element("lam2_txt").write(f"{lam2} nm")
+
+    lam1 = int(lam1)
+    lam2 = int(lam2)
+    Element("L1_txt").write(f"L = {L:.2f} m")
+    Element("a1_txt").write(f"a = {a:.2f} μm")
+    Element("lam1_txt").write(f"λ₁ = {lam1} nm")
+    Element("lam2_txt").write(f"λ₂ = {lam2} nm")
 
     ax.clear()    
 
-    y = difraccion(x, lam1*1e-9, L, a)
-    y2 = difraccion(x, lam2*1e-9, L, a)
+    y = difraccion(x, lam1*1e-9, L, a*1e-6)
+    y2 = difraccion(x, lam2*1e-9, L, a*1e-6)
     color1 = wavelength_to_rgb(lam1)
     color2 = wavelength_to_rgb(lam2)
     ax.plot(x,y, color=color1, label=f"$\lambda$ = {lam1} nm")
@@ -43,40 +43,39 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     Element("viz").write(fig)
     
 
-input_elements = document.getElementsByName("lam")
+input_elements = document.getElementsByName("params1")
 
 @create_proxy
 def change_lambda(event):
-    lam1, lam2 = [int(el.value) for el in input_elements]
-    plot_1(fig, ax, lam1, lam2, *const_1)
+    L, a, lam1, lam2 = [float(el.value) for el in input_elements]
+    plot_1(fig, ax, lam1, lam2, L, a, *const_1)
 
 for ele in input_elements:
     ele.addEventListener("change", change_lambda)
 
 fig, ax = plt.subplots(layout='tight')
 const_1 = setup_1()
-plot_1(fig, ax, 400, 500, *const_1)
+plot_1(fig, ax, 400, 500, 1, 4, *const_1)
 
 #################################
 def setup_2():
-    L = 1
-    d = 30e-6
-    a = 6e-6
-    lam = 600 *1e-9
-    x_lim = 2.2*lam*L/a
+    x_lim = 0.31
     x = np.linspace(-x_lim, x_lim, 100_000)
-    Element("constb").write(f"L = {L} m <br/> a = {int(a*1e6)} μm<br/>d = {int(d*1e6)} μm")
-    return L, a, d, x, x_lim
+    return x, x_lim
 
 def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
-       
-    Element("N_txt").write(f"{N}")
-    Element("lam22_txt").write(f"{lam} nm")
+    
+    lam = int(lam)
+    Element("N2_txt").write(f"N = {N}")
+    Element("L2_txt").write(f"L = {L:.2f} m")
+    Element("a2_txt").write(f"a = {a:.2f} μm")
+    Element("d2_txt").write(f"d = {d} μm")
+    Element("lam2_txt").write(f"λ₂ = {lam} nm")
 
     ax3.clear()  
     ax4.clear()  
 
-    y = int_dif(x, lam*1e-9, L, a, d, N)
+    y = int_dif(x, lam*1e-9, L, a*1e-6, d*1e-6, N)
     color = wavelength_to_rgb(lam)
 
     ax3.plot(x,y, color=color)
@@ -106,8 +105,8 @@ input2_elements = document.getElementsByName("params2")
 
 @create_proxy
 def change_params2(event):
-    N, lam = [int(el.value) for el in input2_elements]
-    plot_2(fig2, ax3, ax4, lam, N, *const_2)
+    L, N, a, d, lam = [float(el.value) for el in input2_elements]
+    plot_2(fig2, ax3, ax4, lam, N, L, a, d, *const_2)
 
 for ele in input2_elements:
     ele.addEventListener("change", change_params2)
@@ -118,7 +117,7 @@ fig2.set_size_inches(10, 8)
 fig2.canvas.header_visible = False
     
 const_2 = setup_2()
-plot_2(fig2, ax3, ax4, 600, 5, *const_2)
+plot_2(fig2, ax3, ax4, 600, 5, 1, 4, 30, *const_2)
 
 ##############
 
