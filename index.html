@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Óptica Física - Física II UNSAM</title>
@@ -23,10 +24,10 @@
         <input type="range" id="a1" name="params1" min="2" max="6" step="0.1" value="4">
         <span id="a1_txt">a = 4 μm</span><br/>
         <label for="lam1">Longitud de onda 1</label><br/>
-        <input type="range" id="lam1" name="params1" min="400" max="700" step="1" value="400">
+        <input type="range" id="lam1" name="params1" min="400" max="700" step="10" value="400">
         <span id="lam1_txt">λ₁ = 400 nm</span><br/>
         <label for="lam2">Longitud de onda 2</label><br/>
-        <input type="range" id="lam2" name="params1" min="400" max="700" step="1" value="500">
+        <input type="range" id="lam2" name="params1" min="400" max="700" step="10" value="500">
         <span id="lam2_txt">λ₂ = 500 nm</span>
       </div>
       <div id="viz"></div>
@@ -45,12 +46,31 @@
         <input type="range" id="d2" name="params2" min="10" max="50" step="1" value="30">
         <span id="d2_txt">d = 30 μm</span><br/>
         <label for="lam22">Longitud de onda</label><br/>
-        <input type="range" id="lam22" name="params2" min="400" max="700" step="1" value="600">
+        <input type="range" id="lam22" name="params2" min="400" max="700" step="10" value="600">
         <span id="lam22_txt">500 nm</span>
       </div>
       
       <div id="vizb"></div>
       <h2>Red de difracción iluminada con un espectro NO monocromático</h2>
+      <div id="input3" style="margin: 20px;">
+        <label for="L3">Distancia a la pantalla</label><br/>
+        <input type="range" id="L3" name="params3" min="1" max="3" step="0.1" value="1">
+        <span id="L3_txt">L = 1 m</span><br/>
+        <label for="N3">Densidad de lineas</label><br/>
+        <input type="range" id="N3" name="params3" min="1000" max="5000" step="500" value="3000">
+        <span id="N3_txt">3000 líneas/cm</span><br/>
+        <label for="d3">Separación entre líneas: </label>
+        <span id="d3_txt">d = 3.33 μm</span><br/>
+        <label for="lam31">Longitud de onda inferior</label><br/>
+        <input type="range" id="lam31" name="params3" min="400" max="700" step="10" value="480">
+        <span id="lam31_txt">λ₁ = 480 nm</span><br/>
+        <label for="lam32">Rango espectral</label><br/>
+        <input type="range" id="lam32" name="params3" min="10" max="300" step="10" value="200">
+        <span id="lam32_txt">200 nm</span><br/>
+        <label for="lam33">Longitud de onda superior: </label>
+        <span id="lam33_txt">λ₂ = 680 nm</span><br/>
+      </div>
+      
       <div id="vizc"></div>
       <py-script src="src/controls.py">
       
