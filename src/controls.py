@@ -143,9 +143,8 @@ for wave in waves:
     i = interferencia(x, wave, L, d, N)
     ax5.plot(x, i, label=f'{wave*1e9:.0f} nm', color=wavelength_to_rgb(wave*1e9))
 
-# ax.legend()
-# loc = plticker.MultipleLocator(base=0.05) # this locator puts ticks at regular intervals
-# ax.xaxis.set_major_locator(loc)
+ax5.set_ylim(0.01,0.9)
+ax5.yaxis.set_visible(False)
 ax5.set_xlabel('x (m)')
 ax5.set_ylabel('Intensidad')
 
