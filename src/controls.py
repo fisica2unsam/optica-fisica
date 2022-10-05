@@ -105,7 +105,7 @@ def change_params2(event):
     Element("L2_txt").write(f"L = {L:.2f} m")
     Element("a2_txt").write(f"a = {a:.2f} μm")
     Element("d2_txt").write(f"d = {d} μm")
-    Element("lam2_txt").write(f"λ₂ = {lam} nm")
+    Element("lam22_txt").write(f"λ₂ = {lam} nm")
     plot_2(fig2, ax3, ax4, lam, N, L, a, d, *const_2)
 
 for ele in input2_elements:
