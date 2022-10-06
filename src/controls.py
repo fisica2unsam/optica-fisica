@@ -70,7 +70,7 @@ def setup_2():
 def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     ax3.clear()  
     ax4.clear()  
-
+  
     y = int_dif(x, lam*1e-9, L, a*1e-6, d*1e-6, N)
     color = wavelength_to_rgb(lam)
 
@@ -81,7 +81,7 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     # ax3.set_xlabel('sen(θ)')
     ax3.set_ylabel('Intensidad')
     height = 1
-    image = np.tile(y, (height,1))
+    image = np.tile(np.sqrt(y), (height,1))
 
     colors = [
         (0,0,0),
@@ -122,24 +122,11 @@ plot_2(fig2, ax3, ax4, 600, 5, 1, 4, 30, *const_2)
 
 ##############
 
-
-# fig3, ax5 = plt.subplots(layout='tight')
-
-
-# L = 1
-# N = 3000        # lineas/cm
-# d = 1/N *1e-2   # metros
-# # a = d/10
-# l_inf = 480 *1e-9
-# l_sup = 650 *1e-9
 def setup_3():
     # x_lim = 3.2*l_sup*L/d
     x_lim = 0.6
     x = np.linspace(-x_lim, x_lim, 40_000)
     return x, x_lim
-
-# wv = 440 *1e-9
-# waves = np.linspace(wv, wv*1.01, 40)
 
 def plot_3(fig3, ax5, l_inf, l_sup, N, L, d, x, x_lim):
     ax5.clear()
