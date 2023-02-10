@@ -4,7 +4,8 @@ import matplotlib.ticker as plticker
 from matplotlib.colors import LinearSegmentedColormap
 plt.rcParams["figure.figsize"] = (9,4)
 from functions import difraccion, interferencia, wavelength_to_rgb, int_dif
-from js import document
+import js
+from pyscript import Element
 
 # from pyodide import create_proxy
 from pyodide.ffi import create_proxy
@@ -44,7 +45,7 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     Element("viz").write(fig)
     
 
-input_elements = document.getElementsByName("params1")
+input_elements = js.document.getElementsByName("params1")
 
 @create_proxy
 def change_lambda(event):
@@ -98,7 +99,7 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     Element("vizb").write(fig2)
 
 
-input2_elements = document.getElementsByName("params2")
+input2_elements = js.document.getElementsByName("params2")
 
 @create_proxy
 def change_params2(event):
@@ -145,7 +146,7 @@ def plot_3(fig3, ax5, l_inf, l_sup, N, L, d, x, x_lim):
     Element("vizc").write(fig3)
 
 
-input3_elements = document.getElementsByName("params3")
+input3_elements = js.document.getElementsByName("params3")
 
 @create_proxy
 def change_params3(event):
