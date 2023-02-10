@@ -4,6 +4,7 @@ import matplotlib.ticker as plticker
 from matplotlib.colors import LinearSegmentedColormap
 plt.rcParams["figure.figsize"] = (9,4)
 from functions import difraccion, interferencia, wavelength_to_rgb, int_dif
+from js import document
 
 # from pyodide import create_proxy
 from pyodide.ffi import create_proxy
