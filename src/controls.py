@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
 from matplotlib.colors import LinearSegmentedColormap
+import random
 plt.rcParams["figure.figsize"] = (9,4)
 from functions import difraccion, interferencia, wavelength_to_rgb, int_dif
 import js
@@ -26,7 +27,6 @@ def setup_1():
 
 def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     ax.clear()    
-
     y = difraccion(x, lam1*1e-9, L, a*1e-6)
     y2 = difraccion(x, lam2*1e-9, L, a*1e-6)
     color1 = wavelength_to_rgb(lam1)
@@ -37,12 +37,13 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     ax.xaxis.set_major_locator(LOC)
     ax.set_ylim(0,1)
     ax.set_xlim(-x_lim, x_lim)
-    # ax.set_xlabel('sen(θ)')
-    ax.set_xlabel('x (m)')
+    ju = random.random()
+    ax.set_xlabel(f'x (m) {ju}')
     ax.set_ylabel('Intensidad')
     ax.legend()
-
-    Element("viz").write(fig)
+    el = Element("viz")
+    el.clear()
+    el.write(fig,append=True)
     
 
 input_elements = js.document.getElementsByName("params1")
@@ -96,7 +97,9 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     ax4.set_xlabel('x (m)')
     ax4.xaxis.set_major_locator(LOC)
     ax4.yaxis.set_visible(False)
-    Element("vizb").write(fig2)
+    el = Element("vizb")
+    el.clear()
+    el.write(fig2,append=True)
 
 
 input2_elements = js.document.getElementsByName("params2")
@@ -143,7 +146,9 @@ def plot_3(fig3, ax5, l_inf, l_sup, N, L, d, x, x_lim):
     ax5.set_xlabel('x (m)')
     ax5.set_ylabel('Intensidad')
 
-    Element("vizc").write(fig3)
+    el = Element("vizc")
+    el.clear()
+    el.write(fig3,append=True)
 
 
 input3_elements = js.document.getElementsByName("params3")
