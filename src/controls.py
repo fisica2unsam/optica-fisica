@@ -6,8 +6,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
 from matplotlib.colors import LinearSegmentedColormap
+import random
 plt.rcParams["figure.figsize"] = (9,4)
 from functions import difraccion, interferencia, wavelength_to_rgb, int_dif
+import js
+from pyscript import Element
 
 # from pyodide import create_proxy
 
@@ -30,7 +33,6 @@ def setup_1():
 
 def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     ax.clear()    
-
     y = difraccion(x, lam1*1e-9, L, a*1e-6)
     y2 = difraccion(x, lam2*1e-9, L, a*1e-6)
     color1 = wavelength_to_rgb(lam1)
@@ -41,8 +43,8 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     ax.xaxis.set_major_locator(LOC)
     ax.set_ylim(0,1)
     ax.set_xlim(-x_lim, x_lim)
-    # ax.set_xlabel('sen(θ)')
-    ax.set_xlabel('x (m)')
+    ju = random.random()
+    ax.set_xlabel(f'x (m) {ju}')
     ax.set_ylabel('Intensidad')
     ax.legend()
 
@@ -51,7 +53,7 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
 
     
 
-input_elements = document.getElementsByName("params1")
+input_elements = js.document.getElementsByName("params1")
 
 @create_proxy
 def change_lambda(event):
@@ -106,7 +108,7 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
 
 
 
-input2_elements = document.getElementsByName("params2")
+input2_elements = js.document.getElementsByName("params2")
 
 @create_proxy
 def change_params2(event):
@@ -154,7 +156,7 @@ def plot_3(fig3, ax5, l_inf, l_sup, N, L, d, x, x_lim):
 
 
 
-input3_elements = document.getElementsByName("params3")
+input3_elements = js.document.getElementsByName("params3")
 
 @create_proxy
 def change_params3(event):

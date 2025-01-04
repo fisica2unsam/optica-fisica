@@ -7,7 +7,15 @@
     <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
     <link rel="stylesheet" href="theme.css" />
     </head>
+  
     <body>
+    <py-config>
+      packages = ["matplotlib", "pandas"]
+      [[fetch]]
+      from = "src/"
+      files = ["functions.py"]
+    </py-config>
+      
       <h1>Física II UNSAM turno tarde</h1>
       <h2>Difracción por una sola rendija, con dos longitudes de onda distintas</h2>
       <div id="input" style="margin: 20px;">
