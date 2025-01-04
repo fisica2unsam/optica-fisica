@@ -1,3 +1,7 @@
+from pyscript import document, display
+from pyscript.ffi import create_proxy
+from pyscript.web import page
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
@@ -6,7 +10,9 @@ plt.rcParams["figure.figsize"] = (9,4)
 from functions import difraccion, interferencia, wavelength_to_rgb, int_dif
 
 # from pyodide import create_proxy
-from pyodide.ffi import create_proxy
+
+def Element(sel):
+    return page.find("#"+sel)[0]
 
 def num(n):
     try:
@@ -29,8 +35,8 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     y2 = difraccion(x, lam2*1e-9, L, a*1e-6)
     color1 = wavelength_to_rgb(lam1)
     color2 = wavelength_to_rgb(lam2)
-    ax.plot(x,y, color=color1, label=f"$\lambda$ = {lam1} nm")
-    ax.plot(x,y2, color=color2, label=f"$\lambda$ = {lam2} nm")
+    ax.plot(x,y, color=color1, label=rf"$\lambda$ = {lam1} nm")
+    ax.plot(x,y2, color=color2, label=rf"$\lambda$ = {lam2} nm")
 
     ax.xaxis.set_major_locator(LOC)
     ax.set_ylim(0,1)
@@ -40,7 +46,9 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     ax.set_ylabel('Intensidad')
     ax.legend()
 
-    Element("viz").write(fig)
+    display(fig, target="viz", append=False)
+
+
     
 
 input_elements = document.getElementsByName("params1")
@@ -48,10 +56,10 @@ input_elements = document.getElementsByName("params1")
 @create_proxy
 def change_lambda(event):
     L, a, lam1, lam2 = [num(el.value) for el in input_elements]
-    Element("L1_txt").write(f"L = {L:.2f} m")
-    Element("a1_txt").write(f"a = {a:.2f} μm")
-    Element("lam1_txt").write(f"λ₁ = {lam1} nm")
-    Element("lam2_txt").write(f"λ₂ = {lam2} nm")
+    Element("L1_txt").innerHTML=f"L = {L:.2f} m"
+    Element("a1_txt").innerHTML=f"a = {a:.2f} μm"
+    Element("lam1_txt").innerHTML=f"λ₁ = {lam1} nm"
+    Element("lam2_txt").innerHTML=f"λ₂ = {lam2} nm"
     plot_1(fig, ax, lam1, lam2, L, a, *const_1)
 
 for ele in input_elements:
@@ -94,7 +102,8 @@ def plot_2(fig2, ax3, ax4, lam, N, L, a, d, x, x_lim):
     ax4.set_xlabel('x (m)')
     ax4.xaxis.set_major_locator(LOC)
     ax4.yaxis.set_visible(False)
-    Element("vizb").write(fig2)
+    display(fig2, target="vizb", append=False)
+
 
 
 input2_elements = document.getElementsByName("params2")
@@ -102,11 +111,11 @@ input2_elements = document.getElementsByName("params2")
 @create_proxy
 def change_params2(event):
     L, N, a, d, lam = [num(el.value) for el in input2_elements]
-    Element("N2_txt").write(f"N = {N}")
-    Element("L2_txt").write(f"L = {L:.2f} m")
-    Element("a2_txt").write(f"a = {a:.2f} μm")
-    Element("d2_txt").write(f"d = {d} μm")
-    Element("lam22_txt").write(f"λ₂ = {lam} nm")
+    Element("N2_txt").innerHTML=f"N = {N}"
+    Element("L2_txt").innerHTML=f"L = {L:.2f} m"
+    Element("a2_txt").innerHTML=f"a = {a:.2f} μm"
+    Element("d2_txt").innerHTML=f"d = {d} μm"
+    Element("lam22_txt").innerHTML=f"λ₂ = {lam} nm"
     plot_2(fig2, ax3, ax4, lam, N, L, a, d, *const_2)
 
 for ele in input2_elements:
@@ -141,7 +150,8 @@ def plot_3(fig3, ax5, l_inf, l_sup, N, L, d, x, x_lim):
     ax5.set_xlabel('x (m)')
     ax5.set_ylabel('Intensidad')
 
-    Element("vizc").write(fig3)
+    display(fig3, target="vizc", append=False)
+
 
 
 input3_elements = document.getElementsByName("params3")
@@ -151,12 +161,12 @@ def change_params3(event):
     L, N, l_inf, l_ran = [num(el.value) for el in input3_elements]
     d = 1e4/N # micrones
     l_sup = l_inf + l_ran
-    Element("L3_txt").write(f"L = {L:.2f} m")
-    Element("N3_txt").write(f"{N} líneas/cm")
-    Element("d3_txt").write(f"d = {d:.2f} μm")
-    Element("lam31_txt").write(f"λ₁ = {l_inf} nm")
-    Element("lam32_txt").write(f"{l_ran} nm")
-    Element("lam33_txt").write(f"λ₂ = {l_sup} nm")
+    Element("L3_txt").innerHTML=f"L = {L:.2f} m"
+    Element("N3_txt").innerHTML=f"{N} líneas/cm"
+    Element("d3_txt").innerHTML=f"d = {d:.2f} μm"
+    Element("lam31_txt").innerHTML=f"λ₁ = {l_inf} nm"
+    Element("lam32_txt").innerHTML=f"{l_ran} nm"
+    Element("lam33_txt").innerHTML=f"λ₂ = {l_sup} nm"
     
     plot_3(fig3, ax5, l_inf, l_sup, N, L, d, *const_3)
 

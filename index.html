@@ -3,15 +3,9 @@
   <head>
     <title>Óptica Física - Física II UNSAM</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
     <link rel="stylesheet" href="theme.css" />
-    <py-env>
-      - matplotlib
-      - numpy
-      - paths:
-          - src/functions.py
-    </py-env>
     </head>
     <body>
       <h1>Física II UNSAM turno tarde</h1>
@@ -72,8 +66,6 @@
       </div>
       
       <div id="vizc"></div>
-      <py-script src="src/controls.py">
-      
-      </py-script>
+      <script type="py" src="src/controls.py" config="./pyscript.toml"></script>
     </body>
 </html>
