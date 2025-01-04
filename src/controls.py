@@ -40,8 +40,7 @@ def plot_1(fig, ax, lam1, lam2, L, a, x, x_lim):
     ax.xaxis.set_major_locator(LOC)
     ax.set_ylim(0,1)
     ax.set_xlim(-x_lim, x_lim)
-    ju = random.random()
-    ax.set_xlabel(f'x (m) {ju}')
+    ax.set_xlabel(f'x (m)')
     ax.set_ylabel('Intensidad')
     ax.legend()
 
